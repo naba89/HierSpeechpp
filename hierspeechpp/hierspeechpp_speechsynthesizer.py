@@ -8,7 +8,7 @@ import hierspeechpp.activations as activations
 import hierspeechpp.attentions as attentions
 import hierspeechpp.commons as commons
 import hierspeechpp.modules as modules
-from hierspeechpp.alias_free_torch import *
+from .alias_free_torch import *
 from hierspeechpp.commons import init_weights, get_padding
 from hierspeechpp.styleencoder import StyleEncoder
 
