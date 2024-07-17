@@ -2,7 +2,7 @@
 #   LICENSE is in incl_licenses directory.
 
 import torch.nn as nn
-from .resample import UpSample1d, DownSample1d
+from hierspeechpp.alias_free_torch.resample import UpSample1d, DownSample1d
 
 
 class Activation1d(nn.Module):
