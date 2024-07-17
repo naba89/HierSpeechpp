@@ -25,6 +25,11 @@ import amfm_decompy.pYAAPT as pYAAPT
 
 from huggingface_hub import snapshot_download
 
+seed = 1111
+torch.manual_seed(seed)
+torch.cuda.manual_seed(seed)
+np.random.seed(seed)
+
 
 def load_checkpoint(filepath, device):
     print(filepath)
