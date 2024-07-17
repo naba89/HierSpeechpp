@@ -4,10 +4,10 @@ import argparse
 import numpy as np
 from scipy.io.wavfile import write
 import torchaudio
-import utils
+from hierspeechpp import utils
 
-from speechsr24k.speechsr import SynthesizerTrn as SpeechSR24
-from speechsr48k.speechsr import SynthesizerTrn as SpeechSR48
+from hierspeechpp.speechsr24k.speechsr import SynthesizerTrn as SpeechSR24
+from hierspeechpp.speechsr48k.speechsr import SynthesizerTrn as SpeechSR48
 
 seed = 1111
 torch.manual_seed(seed)
@@ -84,8 +84,8 @@ def main():
     global device, h_sr, h_sr48
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    h_sr = utils.get_hparams_from_file(os.path.join(os.path.split(a.ckpt_sr)[0], 'config.json') )
-    h_sr48 = utils.get_hparams_from_file(os.path.join(os.path.split(a.ckpt_sr48)[0], 'config.json') )
+    h_sr = utils.get_hparams_from_file(os.path.join(os.path.split(a.ckpt_sr)[0], 'config.json'))
+    h_sr48 = utils.get_hparams_from_file(os.path.join(os.path.split(a.ckpt_sr48)[0], 'config.json'))
 
 
     inference(a)

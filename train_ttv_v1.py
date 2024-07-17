@@ -8,13 +8,12 @@ import torch.distributed as dist
 from torch.utils.data.distributed import DistributedSampler
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.cuda.amp import autocast, GradScaler
-import random 
-import commons
-import utils
+import random
+from hierspeechpp import commons, utils
 
-from ttv_v1.data_loader import AudioDataset, MelSpectrogramFixed
-from ttv_v1.t2w2v_transformer import SynthesizerTrn 
-from losses import kl_loss 
+from hierspeechpp.ttv_v1.data_loader import AudioDataset, MelSpectrogramFixed
+from hierspeechpp.ttv_v1.t2w2v_transformer import SynthesizerTrn
+from hierspeechpp.losses import kl_loss
 
 torch.backends.cudnn.benchmark = True
 global_step = 0

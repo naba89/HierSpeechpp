@@ -4,18 +4,18 @@ import argparse
 import numpy as np
 from scipy.io.wavfile import write
 import torchaudio
-import utils
-from Mels_preprocess import MelSpectrogramFixed
+from hierspeechpp import utils
+from hierspeechpp.Mels_preprocess import MelSpectrogramFixed
 
-from hierspeechpp_speechsynthesizer import (
+from hierspeechpp.hierspeechpp_speechsynthesizer import (
     SynthesizerTrn
 )
-from ttv_v1.text import text_to_sequence
-from ttv_v1.t2w2v_transformer import SynthesizerTrn as Text2W2V
-from speechsr24k.speechsr import SynthesizerTrn as SpeechSR24
-from speechsr48k.speechsr import SynthesizerTrn as SpeechSR48
-from denoiser.generator import MPNet
-from denoiser.infer import denoise
+from hierspeechpp.ttv_v1.text import text_to_sequence
+from hierspeechpp.ttv_v1.t2w2v_transformer import SynthesizerTrn as Text2W2V
+from hierspeechpp.speechsr24k.speechsr import SynthesizerTrn as SpeechSR24
+from hierspeechpp.speechsr48k.speechsr import SynthesizerTrn as SpeechSR48
+from hierspeechpp.denoiser.generator import MPNet
+from hierspeechpp.denoiser.infer import denoise
 
 seed = 1111
 torch.manual_seed(seed)
@@ -214,8 +214,8 @@ def main():
 
     hps = utils.get_hparams_from_file(os.path.join(os.path.split(a.ckpt)[0], 'config.json'))
     hps_t2w2v = utils.get_hparams_from_file(os.path.join(os.path.split(a.ckpt_text2w2v)[0], 'config.json'))
-    h_sr = utils.get_hparams_from_file(os.path.join(os.path.split(a.ckpt_sr)[0], 'config.json') )
-    h_sr48 = utils.get_hparams_from_file(os.path.join(os.path.split(a.ckpt_sr48)[0], 'config.json') )
+    h_sr = utils.get_hparams_from_file(os.path.join(os.path.split(a.ckpt_sr)[0], 'config.json'))
+    h_sr48 = utils.get_hparams_from_file(os.path.join(os.path.split(a.ckpt_sr48)[0], 'config.json'))
     hps_denoiser = utils.get_hparams_from_file(os.path.join(os.path.split(a.denoiser_ckpt)[0], 'config.json'))
 
     inference(a)
