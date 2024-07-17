@@ -1,3 +1,29 @@
+## This Fork:
+This fork modifies the project structure to make it pip installable.
+You can install the package by running:
+```bash
+pip install git+https://github.com/naba89/HierSpeechpp.git
+```
+This fork also adds an inference model class, that can be used as follows:
+```python
+import torch
+from hierspeechpp.inference_api import HierspeechppInferenceModel
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+model = HierspeechppInferenceModel(
+                 hf_repo="subatomicseer/hierspeechpp_checkpoints",
+                 output_sr=24000,
+                 scale_norm='max',
+                 denoise_ratio=0.8,
+                 noise_scale_vc=0.333,
+                 noise_scale_ttv=0.333).to(device)
+model.tts_to_file(text='Hello, how are you?', save_path='output.wav', speaker_prompt='target.wav')
+model.vc_to_file(audio='source.wav', save_path='output.wav', speaker_prompt='target.wav')
+model.super_resolution_to_file(audio='16k.wav', save_path='24k.wav')
+```
+Also hosted the checkpoints on huggingface model hub, for simpler and automated download.
+
+## Original README.md follows:
+
 # HierSpeech++: Bridging the Gap between Semantic and Acoustic Representation by Hierarchical Variational Inference for Zero-shot Speech Synthesis <br><sub>The official implementation of HierSpeech++</sub>
 ##  <a src="https://img.shields.io/badge/cs.CV-2311.12454-b31b1b?logo=arxiv&logoColor=red" href="http://arxiv.org/abs/2311.12454"> <img src="https://img.shields.io/badge/cs.CV-2311.12454-b31b1b?logo=arxiv&logoColor=red"></a>|[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/HierSpeech/HierSpeech_TTS)|[Demo page](https://sh-lee-prml.github.io/HierSpeechpp-demo/)|[Checkpoint](https://drive.google.com/drive/folders/1-L_90BlCkbPyKWWHTUjt5Fsu3kz0du0w?usp=sharing) 
 
