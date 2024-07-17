@@ -117,7 +117,8 @@ class HierspeechppInferenceModel(nn.Module, ModuleUtilsMixin):
                                     hps.train.segment_size // hps.data.hop_length,
                                     **hps.model)
 
-        self.net_g.load_state_dict(torch.load(ckpt_hierspeechpp)).eval()
+        self.net_g.load_state_dict(torch.load(ckpt_hierspeechpp))
+        self.net_g.eval()
 
         if output_sr == 48000:
             h_sr48 = utils.get_hparams_from_file(os.path.join(os.path.split(ckpt_sr48)[0], 'config.json'))
