@@ -248,13 +248,14 @@ class HierspeechppInferenceModel(nn.Module, ModuleUtilsMixin):
         # file_name2 = "{}.wav".format(file_name_s + "_to_" + file_name_t)
         # output_file = os.path.join(a.output_dir, file_name2)
 
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        if self.output_sr == 48000:
-            write(save_path, 48000, converted_audio)
-        elif self.output_sr == 24000:
-            write(save_path, 24000, converted_audio)
-        else:
-            write(save_path, 16000, converted_audio)
+        if save_path is not None:
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+            if self.output_sr == 48000:
+                write(save_path, 48000, converted_audio)
+            elif self.output_sr == 24000:
+                write(save_path, 24000, converted_audio)
+            else:
+                write(save_path, 16000, converted_audio)
 
     def tts_to_file(self, text, save_path, speaker_prompt, **kwargs):
 
@@ -330,13 +331,14 @@ class HierspeechppInferenceModel(nn.Module, ModuleUtilsMixin):
 
         converted_audio = converted_audio.cpu().numpy().astype('int16')
 
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        if self.output_sr == 48000:
-            write(save_path, 48000, converted_audio)
-        elif self.output_sr == 24000:
-            write(save_path, 24000, converted_audio)
-        else:
-            write(save_path, 16000, converted_audio)
+        if save_path is not None:
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+            if self.output_sr == 48000:
+                write(save_path, 48000, converted_audio)
+            elif self.output_sr == 24000:
+                write(save_path, 24000, converted_audio)
+            else:
+                write(save_path, 16000, converted_audio)
 
     def super_resolution_to_file(self, audio, save_path):
         # Prompt load
@@ -355,11 +357,12 @@ class HierspeechppInferenceModel(nn.Module, ModuleUtilsMixin):
             converted_audio = converted_audio / (torch.abs(converted_audio).max()) * 0.999 * 32767.0
             converted_audio = converted_audio.cpu().numpy().astype('int16')
 
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        if self.output_sr == 48000:
-            write(save_path, 48000, converted_audio)
-        else:
-            write(save_path, 24000, converted_audio)
+        if save_path is not None:
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+            if self.output_sr == 48000:
+                write(save_path, 48000, converted_audio)
+            else:
+                write(save_path, 24000, converted_audio)
 
     def forward(self, *args, **kwargs):
         pass
